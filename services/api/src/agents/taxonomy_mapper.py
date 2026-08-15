@@ -8,8 +8,17 @@ class TaxonomyMappingAgent:
     Open-Source Tech: ChromaDB + sentence-transformers.
     """
     def __init__(self):
+        import os
         self.chroma_client = chromadb.Client()
-        self.embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
+        google_api_key = os.getenv("GOOGLE_API_KEY")
+        
+        if google_api_key:
+            # Use Google's API to offload the heavy AI model from Render's limited memory
+            self.embedding_fn = embedding_functions.GoogleGenerativeAiEmbeddingFunction(api_key=google_api_key)
+        else:
+            # Fallback to local model (will cause OOM on Render 512MB free tier)
+            self.embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
+            
         self.collection = self.chroma_client.get_or_create_collection(
             name="b2b_taxonomy", 
             embedding_function=self.embedding_fn
