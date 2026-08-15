@@ -59,7 +59,7 @@ export function UploadCatalogsView({ onNavigate }: UploadCatalogsViewProps) {
     const formData = new FormData()
     formData.append('file', file)
 
-    fetch('http://localhost:8000/process-spec-stream', {
+    fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/process-spec-stream`, {
       method: 'POST',
       body: formData,
     }).then(async (response) => {

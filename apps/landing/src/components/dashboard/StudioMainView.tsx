@@ -33,7 +33,7 @@ export function StudioMainView({ state, onNavigate }: { state: OnboardingState, 
     formData.append('file', file)
 
     try {
-      const response = await fetch('http://localhost:8000/process-spec-stream', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/process-spec-stream`, {
         method: 'POST',
         body: formData,
       })

@@ -65,7 +65,7 @@ export function WorkspaceSetupPage() {
       localStorage.setItem('specpulse_workspace_id', wsId)
     }
 
-    fetch(`http://localhost:8000/workspace/${wsId}`)
+    fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/workspace/${wsId}`)
       .then(res => res.json())
       .then(data => {
         if (data.id) {
@@ -86,7 +86,7 @@ export function WorkspaceSetupPage() {
     const wsId = localStorage.getItem('specpulse_workspace_id')
     if (!wsId) return
     
-    fetch(`http://localhost:8000/workspace`, {
+    fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/workspace`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

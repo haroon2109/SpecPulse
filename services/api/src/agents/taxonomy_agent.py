@@ -7,9 +7,9 @@ class TaxonomyAgent:
     Connects to ChromaDB to classify and map B2B product taxonomies.
     """
     def __init__(self):
-        # Initialize in-memory DB for hackathon prototype
-        self.chroma_client = chromadb.Client(Settings(is_persistent=False))
-        self.collection = self.chroma_client.create_collection(name="taxonomy_unspc")
+        # Initialize persistent DB for production
+        self.chroma_client = chromadb.PersistentClient(path="./chroma_db")
+        self.collection = self.chroma_client.get_or_create_collection(name="taxonomy_unspc")
         
         # Seed mock vectors
         self.collection.add(

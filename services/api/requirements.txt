@@ -10,12 +10,16 @@ langchain
 langchain-groq
 langchain-google-genai
 python-dotenv
+boto3
 pdfplumber
 PyMuPDF
 pint
+celery
+slowapi
 chromadb
 alembic
 streamlit
+pydantic[email]
 google-antigravity>=0.1.0
 python-multipart
 sentence-transformers
