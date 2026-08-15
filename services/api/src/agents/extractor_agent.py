@@ -2,6 +2,7 @@ import pdfplumber
 import json
 import os
 from typing import Dict, Any, List
+from langchain_groq import ChatGroq
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import PromptTemplate
 from pydantic import SecretStr
@@ -16,16 +17,25 @@ class DocumentExtractorSubAgent:
     
     def __init__(self):
         # We try to get the API key from the environment. 
-        # If not present, we will fallback to a dummy extraction so it doesn't crash entirely.
-        self.api_key = os.getenv("GOOGLE_API_KEY")
-        if self.api_key:
+        self.groq_api_key = os.getenv("GROQ_API_KEY")
+        self.google_api_key = os.getenv("GOOGLE_API_KEY")
+        
+        self.llm = None
+        
+        # Try Groq first
+        if self.groq_api_key:
+            self.llm = ChatGroq(
+                model_name="llama3-8b-8192", # Free open-source model hosted on Groq
+                temperature=0,
+                api_key=SecretStr(self.groq_api_key)
+            )
+        # Fallback to Google Gemini
+        elif self.google_api_key:
             self.llm = ChatGoogleGenerativeAI(
                 model="gemini-1.5-flash",
                 temperature=0,
-                api_key=SecretStr(self.api_key)
+                api_key=SecretStr(self.google_api_key)
             )
-        else:
-            self.llm = None
             
         self.prompt = PromptTemplate.from_template(
             """You are an expert technical data extractor. 
