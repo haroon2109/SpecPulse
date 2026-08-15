@@ -14,7 +14,10 @@ class TaxonomyMappingAgent:
         
         if google_api_key:
             # Use Google's API to offload the heavy AI model from Render's limited memory
-            self.embedding_fn = embedding_functions.GoogleGenerativeAiEmbeddingFunction(api_key=google_api_key)
+            self.embedding_fn = embedding_functions.GoogleGenerativeAiEmbeddingFunction(
+                api_key=google_api_key,
+                model_name="models/text-embedding-004"
+            )
         else:
             # Fallback to local model (will cause OOM on Render 512MB free tier)
             self.embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")

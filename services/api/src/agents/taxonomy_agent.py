@@ -15,7 +15,10 @@ class TaxonomyAgent:
         
         google_api_key = os.getenv("GOOGLE_API_KEY")
         if google_api_key:
-            self.embedding_fn = embedding_functions.GoogleGenerativeAiEmbeddingFunction(api_key=google_api_key)
+            self.embedding_fn = embedding_functions.GoogleGenerativeAiEmbeddingFunction(
+                api_key=google_api_key, 
+                model_name="models/text-embedding-004"
+            )
         else:
             self.embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
             
