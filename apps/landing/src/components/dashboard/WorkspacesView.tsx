@@ -1,4 +1,4 @@
-import { Building2, Search, Users, Database, FileText, MoreVertical, Plus, Info, X, ChevronRight, ChevronLeft, ArrowRight } from 'lucide-react'
+import { Building2, Search, Users, Database, MoreVertical, Plus, Info, X, ChevronRight, ChevronLeft, ArrowRight } from 'lucide-react'
 import { toast } from 'sonner'
 import { useState, useEffect } from 'react'
 
@@ -18,7 +18,7 @@ interface Workspace {
   lastActivity: string;
 }
 
-export function WorkspacesView({ onNavigate, currentWorkspace, onSelectWorkspace }: WorkspacesViewProps) {
+export function WorkspacesView({ onNavigate, onSelectWorkspace }: WorkspacesViewProps) {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([])
   const [searchQuery, setSearchQuery] = useState('')
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)

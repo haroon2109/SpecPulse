@@ -1,4 +1,4 @@
-import { User, Mail, Briefcase, Phone, Building2, Link as LinkIcon, Check, ChevronDown, Gift } from 'lucide-react'
+import { User, Mail, Briefcase, Phone, Building2, Link as LinkIcon, Check, ChevronDown } from 'lucide-react'
 
 export function WorkspaceFormCard({ state, updateState, onContinue }: { state: any, updateState: (s: any) => void, onContinue: () => void }) {
   

@@ -1,4 +1,4 @@
-import { Target, Activity, LayoutTemplate, Layers, ArrowLeft, Check, ChevronDown } from 'lucide-react'
+import { Target, Activity, LayoutTemplate, Layers, ArrowLeft, Check } from 'lucide-react'
 
 export function PreferencesFormCard({ state, updateState, onBack, onContinue }: { state: any, updateState: (s: any) => void, onBack: () => void, onContinue: () => void }) {
   

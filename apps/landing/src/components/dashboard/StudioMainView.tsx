@@ -6,7 +6,7 @@ import type { OnboardingState } from '../onboarding/WorkspaceSetupPage'
 export function StudioMainView({ state, onNavigate }: { state: OnboardingState, onNavigate: (tab: any) => void }) {
   const [isUploading, setIsUploading] = useState(false)
   const [uploadStatus, setUploadStatus] = useState('')
-  const [uploadProgress, setUploadProgress] = useState(0)
+
   const [loading, setLoading] = useState(true)
   const [processedDocs, setProcessedDocs] = useState<any[]>([])
   const [stats, setStats] = useState({ docs: 0, attrs: 0, products: 0 })
@@ -94,7 +94,7 @@ export function StudioMainView({ state, onNavigate }: { state: OnboardingState, 
     }
   }
   // Calculate dynamic data
-  const numDocs = state.dataSources.connectedSources.length
+
   
   // Empty states vs actual data checks
   const totalDocs = state.dataSources.connectedSources.length + stats.docs
@@ -397,7 +397,7 @@ export function StudioMainView({ state, onNavigate }: { state: OnboardingState, 
                   </thead>
                   <tbody>
                     {/* Dynamically uploaded documents */}
-                    {processedDocs.map((doc, i) => (
+                    {processedDocs.map((doc) => (
                       <tr key={doc.id} className="border-b border-spec-border/50 hover:bg-[#FAFAFA] transition-colors group">
                         <td className="py-4 pl-2 font-semibold text-spec-navy flex items-center gap-2 max-w-[200px]">
                           <FileText className="w-4 h-4 shrink-0 text-red-500" />
@@ -416,7 +416,7 @@ export function StudioMainView({ state, onNavigate }: { state: OnboardingState, 
                       </tr>
                     ))}
                     {/* Onboarding connected sources (mock) */}
-                    {state.dataSources.connectedSources.map((source, i) => (
+                    {state.dataSources.connectedSources.map((source) => (
                       <tr key={source.id} className="border-b border-spec-border/50 hover:bg-[#FAFAFA] transition-colors group">
                         <td className="py-4 pl-2 font-semibold text-spec-navy flex items-center gap-2 max-w-[200px]">
                           <source.icon className={`w-4 h-4 shrink-0 ${source.color || 'text-gray-500'}`} />

@@ -1,4 +1,4 @@
-import { ArrowLeft, Users, Mail, Plus, Send, Link as LinkIcon, Settings, Info } from 'lucide-react'
+import { ArrowLeft, Users, Mail, Plus, Send, Settings, Info } from 'lucide-react'
 import { useState } from 'react'
 
 interface InviteTeamViewProps {

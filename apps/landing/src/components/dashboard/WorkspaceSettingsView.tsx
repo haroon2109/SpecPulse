@@ -1,4 +1,5 @@
-import { useState, FormEvent } from 'react'
+import React, { useState } from 'react'
+import type { FormEvent } from 'react'
 import { ChevronRight, Info, CloudUpload, Users, Trash2, Lock, ChevronDown } from 'lucide-react'
 import type { OnboardingState } from '../onboarding/WorkspaceSetupPage'
 
