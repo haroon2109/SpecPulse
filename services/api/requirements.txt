@@ -23,3 +23,5 @@ pydantic[email]
 google-antigravity>=0.1.0
 python-multipart
 sentence-transformers
+passlib[bcrypt]
+PyJWT
