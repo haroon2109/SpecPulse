@@ -1,0 +1,85 @@
+services:
+  # ---------------------------------------------------------
+  # 1. PostgreSQL Database
+  # ---------------------------------------------------------
+  - type: psql
+    name: specpulse-db
+    plan: free
+    postgresMajorVersion: 15
+
+  # ---------------------------------------------------------
+  # 2. Redis Cache / Broker
+  # ---------------------------------------------------------
+  - type: redis
+    name: specpulse-redis
+    plan: free
+    ipAllowList: [] # Allow internal connections only by default
+
+  # ---------------------------------------------------------
+  # 3. FastAPI Web Service
+  # ---------------------------------------------------------
+  - type: web
+    name: specpulse-api
+    env: python
+    plan: free
+    rootDir: services/api
+    buildCommand: "pip install -r requirements.txt"
+    # Run migrations before starting the server
+    startCommand: "alembic upgrade head && uvicorn src.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: specpulse-db
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: specpulse-redis
+          property: connectionString
+      - key: ENFORCE_HTTPS
+        value: "true"
+      # The following must be set manually in the Render Dashboard
+      - key: SECRET_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: MINIO_URL
+        sync: false
+      - key: MINIO_ACCESS_KEY
+        sync: false
+      - key: MINIO_SECRET_KEY
+        sync: false
+
+  # ---------------------------------------------------------
+  # 4. Celery Background Worker
+  # ---------------------------------------------------------
+  - type: worker
+    name: specpulse-worker
+    env: python
+    plan: free
+    rootDir: services/api
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "celery -A src.worker.celery_app worker --loglevel=info"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: specpulse-db
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: specpulse-redis
+          property: connectionString
+      # Sync the same secrets as the API
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: MINIO_URL
+        sync: false
+      - key: MINIO_ACCESS_KEY
+        sync: false
+      - key: MINIO_SECRET_KEY
+        sync: false
