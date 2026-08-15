@@ -1,12 +1,12 @@
-services:
+databases:
   # ---------------------------------------------------------
   # 1. PostgreSQL Database
   # ---------------------------------------------------------
-  - type: psql
-    name: specpulse-db
+  - name: specpulse-db
     plan: free
-    postgresMajorVersion: 15
+    postgresMajorVersion: "15"
 
+services:
   # ---------------------------------------------------------
   # 2. Redis Cache / Broker
   # ---------------------------------------------------------
