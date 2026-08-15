@@ -7,10 +7,22 @@ class TaxonomyAgent:
     Connects to ChromaDB to classify and map B2B product taxonomies.
     """
     def __init__(self):
+        import os
+        from chromadb.utils import embedding_functions
+        
         # Initialize persistent DB for production
         self.chroma_client = chromadb.PersistentClient(path="./chroma_db")
-        self.collection = self.chroma_client.get_or_create_collection(name="taxonomy_unspc")
         
+        google_api_key = os.getenv("GOOGLE_API_KEY")
+        if google_api_key:
+            self.embedding_fn = embedding_functions.GoogleGenerativeAiEmbeddingFunction(api_key=google_api_key)
+        else:
+            self.embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
+            
+        self.collection = self.chroma_client.get_or_create_collection(
+            name="taxonomy_unspc",
+            embedding_function=self.embedding_fn
+        )
         # Seed mock vectors
         self.collection.add(
             documents=["Variable Frequency Drives for AC motors", "Centrifugal Water Pumps"],
