@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ChevronRight, SlidersHorizontal, Lock, Cpu, Sparkles, CheckCircle2 } from 'lucide-react'
+import { ChevronRight, SlidersHorizontal, Lock } from 'lucide-react'
 
 interface AIExtractionSettingsViewProps {
   onNavigate: (tab: 'settings') => void;

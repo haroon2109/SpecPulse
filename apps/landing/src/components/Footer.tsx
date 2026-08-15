@@ -1,4 +1,4 @@
-import { Globe, MessageCircle, Mail } from 'lucide-react'
+import { Mail } from 'lucide-react'
 
 export function Footer() {
   const links = [

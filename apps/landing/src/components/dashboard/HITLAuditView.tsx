@@ -1,4 +1,4 @@
-import { ShieldCheck, Filter, AlertCircle, CheckCircle2, ChevronRight, MessageSquare, Clock, ArrowRight, User, MoreHorizontal, FileText, ChevronDown, ChevronUp, ClipboardList, XCircle, Target, Info, ExternalLink } from 'lucide-react'
+import { ShieldCheck, Filter, CheckCircle2, Clock, FileText, ChevronDown, ChevronUp, ClipboardList, XCircle, Target, Info, ExternalLink } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 export function HITLAuditView() {

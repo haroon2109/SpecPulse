@@ -1,5 +1,5 @@
 import { Command } from 'cmdk'
-import { LayoutGrid, ShieldCheck, Settings, Building2, Database, SlidersHorizontal, Bell, Clock, FileText, Upload, Plus, Users } from 'lucide-react'
+import { LayoutGrid, ShieldCheck, Settings, Building2, Database, SlidersHorizontal, Clock, FileText, Plus, Users } from 'lucide-react'
 import { useEffect } from 'react'
 import { Search } from 'lucide-react'
 
