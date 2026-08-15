@@ -27,6 +27,8 @@ services:
     # Run migrations before starting the server
     startCommand: "alembic upgrade head && uvicorn src.main:app --host 0.0.0.0 --port $PORT"
     envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.0"
       - key: DATABASE_URL
         fromDatabase:
           name: specpulse-db
@@ -63,6 +65,8 @@ services:
     buildCommand: "pip install -r requirements.txt"
     startCommand: "celery -A src.worker.celery_app worker --loglevel=info"
     envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.0"
       - key: DATABASE_URL
         fromDatabase:
           name: specpulse-db
