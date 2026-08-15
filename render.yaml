@@ -63,7 +63,7 @@ services:
     plan: free
     rootDir: services/api
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "celery -A src.worker.celery_app worker --loglevel=info"
+    startCommand: "celery -A src.worker.celery_app worker --pool=solo --concurrency=1 --loglevel=info"
     envVars:
       - key: PYTHON_VERSION
         value: "3.11.0"
