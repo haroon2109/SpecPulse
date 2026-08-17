@@ -16,13 +16,11 @@ PyMuPDF
 pint
 celery
 slowapi
-chromadb
 alembic
 streamlit
 pydantic[email]
 google-antigravity>=0.1.0
 python-multipart
-sentence-transformers
 passlib[bcrypt]
 PyJWT
 google-generativeai
